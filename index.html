@@ -3,13 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Demo</title>
+  <title>视频展示</title>
 </head>
 <body>
-  <h1>Video Playback</h1>
-  <video width="640" height="360" controls>
-    <source src="./video/100030-video-720.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <h1>视频展示</h1>
+  <div id="video-gallery"></div>
+
+  <script>
+    const getVideoData = [
+      {
+        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/100030-video-720.mp4",
+        title: "标题1",
+        username: "用户1",
+        like_num: Math.floor(Math.random() * 1200),
+        fav_num: Math.floor(Math.random() * 1000),
+        commentnum: Math.floor(Math.random() * 1000),
+      },
+      {
+        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/mixkit-52288-video-52288-hd-ready.mp4",
+        title: "标题2",
+        username: "用户2",
+        like_num: Math.floor(Math.random() * 1000),
+        fav_num: Math.floor(Math.random() * 1000),
+        commentnum: Math.floor(Math.random() * 1000),
+      },
+      {
+        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/mixkit-cold-looking-fashion-woman-in-a-winter-environment-39879-hd-ready.mp4",
+        title: "标题3",
+        username: "用户3",
+        like_num: Math.floor(Math.random() * 1000),
+        fav_num: Math.floor(Math.random() * 1000),
+        commentnum: Math.floor(Math.random() * 1000),
+      },
+    ];
+
+    const videoGallery = document.getElementById("video-gallery");
+
+    getVideoData.forEach((video) => {
+      const videoElement = document.createElement("div");
+      videoElement.classList.add("video-item");
+
+      videoElement.innerHTML = `
+        <h3>${video.title}</h3>
+        <video width="640" height="360" controls>
+          <source src="${video.video_url}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>发布者：${video.username}</p>
+        <p>点赞：${video.like_num} | 收藏：${video.fav_num} | 评论：${video.commentnum}</p>
+      `;
+
+      videoGallery?.appendChild(videoElement);
+    });
+  </script>
 </body>
 </html>
