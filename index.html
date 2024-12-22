@@ -1,59 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>视频展示</title>
 </head>
 <body>
-  <h1>视频展示</h1>
-  <div id="video-gallery"></div>
+  <h1>视频列表</h1>
+
+  <!-- 用于展示视频的容器 -->
+  <div id="videoContainer"></div>
 
   <script>
+    // 定义视频数据
     const getVideoData = [
       {
-        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/100030-video-720.mp4",
-        title: "标题1",
-        username: "用户1",
-        like_num: Math.floor(Math.random() * 1200),
-        fav_num: Math.floor(Math.random() * 1000),
-        commentnum: Math.floor(Math.random() * 1000),
+        video_url: 'https://sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4',
+        title: '标题1',
+        username: '用户1'
       },
       {
-        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/mixkit-52288-video-52288-hd-ready.mp4",
-        title: "标题2",
-        username: "用户2",
-        like_num: Math.floor(Math.random() * 1000),
-        fav_num: Math.floor(Math.random() * 1000),
-        commentnum: Math.floor(Math.random() * 1000),
+        video_url: 'https://stream7.iqilu.com/10339/upload_transcode/202002/09/20200209105011F0zPoYzHry.mp4',
+        title: '标题2',
+        username: '用户2'
       },
       {
-        video_url: "https://raw.githubusercontent.com/Pr3d1ct-YUY4N/video1/main/video/mixkit-cold-looking-fashion-woman-in-a-winter-environment-39879-hd-ready.mp4",
-        title: "标题3",
-        username: "用户3",
-        like_num: Math.floor(Math.random() * 1000),
-        fav_num: Math.floor(Math.random() * 1000),
-        commentnum: Math.floor(Math.random() * 1000),
+        video_url: 'https://stream7.iqilu.com/10339/upload_transcode/202002/09/20200209104902N3v5Vpxuvb.mp4',
+        title: '标题3',
+        username: '用户3'
       },
+      {
+        video_url: 'https://vjs.zencdn.net/v/oceans.mp4',
+        title: '标题4',
+        username: '用户4'
+      }
     ];
 
-    const videoGallery = document.getElementById("video-gallery");
+    // 获取容器
+    const videoContainer = document.getElementById("videoContainer");
 
-    getVideoData.forEach((video) => {
-      const videoElement = document.createElement("div");
-      videoElement.classList.add("video-item");
+    // 遍历视频数据，动态生成视频标签
+    getVideoData.forEach(video => {
+      const videoElement = document.createElement("video");
+      videoElement.width = 640;  // 设置视频宽度
+      videoElement.height = 360; // 设置视频高度
+      videoElement.controls = true; // 显示控制条
 
-      videoElement.innerHTML = `
-        <h3>${video.title}</h3>
-        <video width="640" height="360" controls>
-          <source src="${video.video_url}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <p>发布者：${video.username}</p>
-        <p>点赞：${video.like_num} | 收藏：${video.fav_num} | 评论：${video.commentnum}</p>
-      `;
+      const sourceElement = document.createElement("source");
+      sourceElement.src = video.video_url;
+      sourceElement.type = "video/mp4";
+      videoElement.appendChild(sourceElement);  // 添加视频源
 
-      videoGallery?.appendChild(videoElement);
+      // 创建标题和用户名
+      const titleElement = document.createElement("h3");
+      titleElement.textContent = video.title;
+
+      const usernameElement = document.createElement("p");
+      usernameElement.textContent = `上传者: ${video.username}`;
+
+      // 将标题、用户名和视频元素插入页面
+      videoContainer.appendChild(titleElement);
+      videoContainer.appendChild(usernameElement);
+      videoContainer.appendChild(videoElement);
     });
   </script>
 </body>
